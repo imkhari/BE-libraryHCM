@@ -8,8 +8,8 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: validate # Ch? ki?m tra xem entity có kh?p v?i b?ng không, vì mình ?ã t?o b?ng b?ng SQL r?i
-    show-sql: true # Hi?n th? câu l?nh SQL trên console ?? d? debug
+      ddl-auto: validate
+    show-sql: true
     properties:
       hibernate:
         format_sql: true
