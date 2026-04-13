@@ -8,7 +8,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/news")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://library-hcm-64ve.vercel.app")
 public class NewsController {
 
     @Autowired

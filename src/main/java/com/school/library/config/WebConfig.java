@@ -12,7 +12,8 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 // Thay allowedOrigins("*") thành allowedOriginPatterns("*")
-                .allowedOriginPatterns("*")
+//                .allowedOriginPatterns("")
+                .allowedOrigins("https://library-hcm-64ve.vercel.app")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);
