@@ -31,7 +31,7 @@ public class Document {
     @Column(name = "publisher_year")
     private Integer publisherYear;
 
-    @Column(name = "cover_image_url")
+    @Column(name = "cover_image_url, length = 2000")
     private String coverImageUrl;
 
     @Column(name = "file_url")
