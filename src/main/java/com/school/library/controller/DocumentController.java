@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/documents")
-@CrossOrigin(origins = "http://localhost:5173") // Cho phép React gọi API
+@CrossOrigin(origins = "*", maxAge = 3600) // Cho phép React gọi API
 public class DocumentController {
 
     @Autowired
