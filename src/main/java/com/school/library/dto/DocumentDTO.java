@@ -12,6 +12,7 @@ public class DocumentDTO {
     private String author;
     private String publisherYear;
     private String coverImageUrl;
+    private String slug;
 
     // Thuộc tính mới
     private ReadType readType;

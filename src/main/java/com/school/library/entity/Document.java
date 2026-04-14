@@ -23,7 +23,7 @@ public class Document {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "slug", nullable = false, unique = true)
     private String slug;
 
     private String author;
