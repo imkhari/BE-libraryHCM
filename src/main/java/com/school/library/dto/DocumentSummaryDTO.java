@@ -1,5 +1,6 @@
 package com.school.library.dto;
 
+import com.school.library.enums.ReadType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,4 +14,5 @@ public class DocumentSummaryDTO {
     private String author;
     private String coverImageUrl;
     private String slug;
+    private ReadType readType;
 }
