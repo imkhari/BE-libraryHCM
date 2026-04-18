@@ -90,7 +90,8 @@ public class DocumentService {
                 document.getAuthor(),
                 document.getCoverImageUrl(),
                 document.getSlug(),
-                document.getReadType()
+                document.getReadType(),
+                document.getDescription()
         );
     }
 

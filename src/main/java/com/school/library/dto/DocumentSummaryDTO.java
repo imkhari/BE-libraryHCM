@@ -15,4 +15,5 @@ public class DocumentSummaryDTO {
     private String coverImageUrl;
     private String slug;
     private ReadType readType;
+    private String description;
 }
