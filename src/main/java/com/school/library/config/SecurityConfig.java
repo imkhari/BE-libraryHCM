@@ -28,19 +28,22 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Tắt CSRF vì mình dùng Token
-                .cors(cors -> cors.configure(http)) // Bật CORS cho React
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Không dùng Session
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configure(http))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        // CÁC ĐƯỜNG DẪN CÔNG KHAI (Ai cũng vào được)
+                        // 1. Mở cửa cho API Đăng nhập
                         .requestMatchers("/api/v1/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/articles/**").permitAll() // Xem tin tức
-                        .requestMatchers(HttpMethod.POST, "/api/v1/analytics/visit").permitAll() // Popup ghi nhận lượt xem
 
-                        // CÁC ĐƯỜNG DẪN BẮT BUỘC CÓ TOKEN (Chỉ Admin)
+                        // 2. Mở cửa cho API đếm View
+                        .requestMatchers(HttpMethod.POST, "/api/v1/analytics/visit").permitAll()
+
+                        // 3. Cho phép Khách vãng lai gọi TẤT CẢ các API có phương thức GET (Đọc dữ liệu)
+                        .requestMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
+
+                        // 4. Các API còn lại (Đăng bài, Xóa bài...) vẫn bị khóa chặt, bắt buộc phải có thẻ JWT
                         .anyRequest().authenticated()
                 )
-                // Thêm ông bảo vệ JwtFilter vào đứng trước cổng
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
