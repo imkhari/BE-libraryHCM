@@ -44,6 +44,16 @@ public class ArticleController {
         }
     }
 
+    // GET /api/articles/1 (Lấy chi tiết 1 bài)
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getArticleById(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(articleService.getArticleById(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @Data
     public static class ArticleRequest {
         private String title;

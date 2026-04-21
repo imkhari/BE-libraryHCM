@@ -1,6 +1,7 @@
 package com.school.library.service;
 
 import com.school.library.entity.Visit;
+import com.school.library.repository.ArticleRepository;
 import com.school.library.repository.VisitRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.Map;
 public class AnalyticsService {
 
     private final VisitRepository visitRepository;
+    private final ArticleRepository articleRepository;
 
     // Ghi nhận ai đó vừa vào web
     public void logVisit(String role) {
@@ -29,6 +31,10 @@ public class AnalyticsService {
         stats.put("TEACHER", visitRepository.countByVisitorRole("TEACHER"));
         stats.put("GUEST", visitRepository.countByVisitorRole("GUEST"));
         stats.put("TOTAL", visitRepository.count()); // Tổng số tất cả các lượt truy cập
+
+        stats.put("TOTAL_ARTICLES", articleRepository.count()); // Đếm tổng tất cả
+        stats.put("ARTICLE_TIN_TUC", articleRepository.countByCategory("TIN_TUC"));
+        stats.put("ARTICLE_HOC_TAP_BAC", articleRepository.countByCategory("HOC_TAP_BAC"));
 
         return stats;
     }

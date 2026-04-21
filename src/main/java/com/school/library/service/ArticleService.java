@@ -38,4 +38,10 @@ public class ArticleService {
 
         return articleRepository.save(article);
     }
+
+    // Lấy chi tiết 1 bài viết theo ID
+    public Article getArticleById(Long id) {
+        return articleRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy bài viết!"));
+    }
 }

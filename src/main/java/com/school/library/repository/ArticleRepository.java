@@ -9,6 +9,8 @@ import java.util.List;
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
+    long countByCategory(String category);
+
     // Lấy tất cả bài viết của 1 chuyên mục, sắp xếp mới nhất lên đầu
     List<Article> findByCategoryOrderByCreatedAtDesc(String category);
 
