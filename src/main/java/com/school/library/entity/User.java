@@ -24,6 +24,7 @@ public class User {
     @Column(name = "full_name", nullable = false)
     private String fullName;
 
+    @Column(nullable = false)
     private String role = "ADMIN";
 
     @Column(name = "last_login")

@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         // NHÓM API CÔNG KHAI (KHÔNG CẦN ĐĂNG NHẬP)
-                        .requestMatchers("/api/v1/auth/login").permitAll() // Cổng đăng nhập
+                        .requestMatchers("/api/v1/auth/login", "/api/v1/auth/register").permitAll() // Cổng đăng nhập, đăng kí
                         .requestMatchers(HttpMethod.POST, "/api/v1/analytics/visit").permitAll() // Đếm lượt view
                         .requestMatchers(HttpMethod.GET, "/api/v1/**").permitAll() // Khách được đọc mọi thứ (bài viết, sách, thống kê...)
 
