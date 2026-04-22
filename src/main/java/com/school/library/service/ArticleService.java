@@ -44,4 +44,23 @@ public class ArticleService {
         return articleRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy bài viết!"));
     }
+
+    public Article updateArticle(Long id, Article articleDetails) {
+        Article article = articleRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy bài viết với ID: " + id));
+
+        // Cập nhật các thông tin mới
+        article.setTitle(articleDetails.getTitle());
+        article.setContent(articleDetails.getContent());
+        article.setCategory(articleDetails.getCategory());
+        article.setAuthor(articleDetails.getAuthor());
+        article.setCreatedAt(articleDetails.getCreatedAt());
+        return articleRepository.save(article);
+    }
+
+    public void deleteArticle(Long id) {
+        Article article = articleRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy bài viết với ID: " + id));
+        articleRepository.delete(article);
+    }
 }

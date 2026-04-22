@@ -32,16 +32,17 @@ public class SecurityConfig {
                 .cors(cors -> cors.configure(http))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        // 1. Mở cửa cho API Đăng nhập
-                        .requestMatchers("/api/v1/auth/login").permitAll()
+                        // NHÓM API CÔNG KHAI (KHÔNG CẦN ĐĂNG NHẬP)
+                        .requestMatchers("/api/v1/auth/login").permitAll() // Cổng đăng nhập
+                        .requestMatchers(HttpMethod.POST, "/api/v1/analytics/visit").permitAll() // Đếm lượt view
+                        .requestMatchers(HttpMethod.GET, "/api/v1/**").permitAll() // Khách được đọc mọi thứ (bài viết, sách, thống kê...)
 
-                        // 2. Mở cửa cho API đếm View
-                        .requestMatchers(HttpMethod.POST, "/api/v1/analytics/visit").permitAll()
+                        // NHÓM API QUẢN TRỊ (BẮT BUỘC PHẢI CÓ TOKEN HỢP LỆ)
+                        .requestMatchers(HttpMethod.POST, "/api/v1/articles/**").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/articles/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/articles/**").authenticated()
 
-                        // 3. Cho phép Khách vãng lai gọi TẤT CẢ các API có phương thức GET (Đọc dữ liệu)
-                        .requestMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
-
-                        // 4. Các API còn lại (Đăng bài, Xóa bài...) vẫn bị khóa chặt, bắt buộc phải có thẻ JWT
+                        // Khóa toàn bộ các API lạ hoặc mới tạo sau này, muốn gọi phải có Token
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

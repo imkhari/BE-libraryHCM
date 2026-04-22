@@ -54,6 +54,26 @@ public class ArticleController {
         }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateArticle(@PathVariable Long id, @RequestBody Article articleDetails) {
+        try {
+            Article updatedArticle = articleService.updateArticle(id, articleDetails);
+            return ResponseEntity.ok(updatedArticle);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Lỗi khi cập nhật: " + e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteArticle(@PathVariable Long id) {
+        try {
+            articleService.deleteArticle(id);
+            return ResponseEntity.ok("Đã xóa bài viết thành công!");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Lỗi khi xóa: " + e.getMessage());
+        }
+    }
+
     @Data
     public static class ArticleRequest {
         private String title;
