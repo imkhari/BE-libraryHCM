@@ -25,6 +25,7 @@ public class AuthController {
     // ==========================================
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+        System.out.println("POSTMAN ĐANG GỬI LÊN: Username = [" + request.getUsername() + "], Password = [" + request.getPassword() + "]");
         try {
             User user = authService.authenticate(request.getUsername(), request.getPassword());
             // Tạo Token

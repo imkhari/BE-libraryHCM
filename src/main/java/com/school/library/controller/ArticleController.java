@@ -5,6 +5,8 @@ import com.school.library.service.ArticleService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,9 +30,8 @@ public class ArticleController {
     @PostMapping
     public ResponseEntity<?> createArticle(@RequestBody ArticleRequest request) {
         try {
-            // TẠM THỜI gán cứng username để test API.
-            // Sau này khi có Security, ta sẽ lấy username động từ Token của người gửi.
-            String authorUsername = "thaiphien_admin";
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String authorUsername = authentication.getName(); // Lấy đúng tên đăng nhập thật
 
             Article newArticle = articleService.createArticle(
                     request.getTitle(),
