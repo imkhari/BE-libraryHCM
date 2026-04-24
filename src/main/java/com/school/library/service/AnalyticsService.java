@@ -30,6 +30,7 @@ public class AnalyticsService {
         stats.put("STUDENT", visitRepository.countByVisitorRole("STUDENT"));
         stats.put("TEACHER", visitRepository.countByVisitorRole("TEACHER"));
         stats.put("GUEST", visitRepository.countByVisitorRole("GUEST"));
+        stats.put("PARTY_MEMBER", visitRepository.countByVisitorRole("PARTY_MEMBER"));
         stats.put("TOTAL", visitRepository.count()); // Tổng số tất cả các lượt truy cập
 
         stats.put("TOTAL_ARTICLES", articleRepository.count()); // Đếm tổng tất cả

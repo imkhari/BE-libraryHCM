@@ -17,7 +17,7 @@ public class AnalyticsController {
     private final AnalyticsService analyticsService;
 
     // POST /api/v1/analytics/visit
-    // Gọi mỗi khi có người chọn vai trò (Học sinh/Giáo viên/Khách) trên web
+    // Gọi mỗi khi có người chọn vai trò (Học sinh/Giáo viên/Đảng viên/Khách) trên web
     @PostMapping("/visit")
     public ResponseEntity<?> logVisit(@RequestBody VisitRequest request) {
         try {
@@ -37,6 +37,6 @@ public class AnalyticsController {
 
     @Data
     public static class VisitRequest {
-        private String role; // TEACHER, STUDENT, GUEST
+        private String role; // TEACHER, STUDENT, GUEST, PARTY_MEMBER
     }
 }
