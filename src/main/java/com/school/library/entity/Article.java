@@ -30,7 +30,7 @@ public class Article {
 
     private Integer views = 0;
 
-    @Column(name = "thumbnail_url", length = 1000)
+    @Column(name = "thumbnail_url",columnDefinition = "TEXT")
     private String thumbnailUrl;
 
     @Column(length = 500)
