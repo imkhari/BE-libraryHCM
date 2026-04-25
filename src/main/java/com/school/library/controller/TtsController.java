@@ -21,24 +21,33 @@ public class TtsController {
     public ResponseEntity<?> synthesize(@RequestBody Map<String, String> request) {
         String text = request.get("text");
 
+        // 🌟 BẢO VỆ: Nếu text quá dài, FPT sẽ chặn. Ta chỉ lấy tối đa 4000 ký tự.
+        if (text != null && text.length() > 4000) {
+            text = text.substring(0, 4000) + "... (Hết phần nghe thử do bài viết quá dài)";
+        }
+
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
-        // Cấu hình Header chuẩn theo tài liệu V5 của FPT
         headers.set("api-key", apiKey);
         headers.set("speed", "");
-        headers.set("voice", "leminh"); // 🌟 Đã chốt giọng Lê Minh ở đây
+        headers.set("voice", "leminh");
 
-        // Đóng gói văn bản và header
+        // Đảm bảo gửi dạng chuỗi UTF-8 chuẩn
+        headers.setContentType(org.springframework.http.MediaType.valueOf("text/plain; charset=utf-8"));
         HttpEntity<String> entity = new HttpEntity<>(text, headers);
 
         try {
-            // 🌟 Gọi đúng đường dẫn V5 như trong ảnh bạn chụp
             ResponseEntity<Map> response = restTemplate.postForEntity(
                     "https://api.fpt.ai/hmi/tts/v5", entity, Map.class);
-
             return ResponseEntity.ok(response.getBody());
+
+        } catch (org.springframework.web.client.HttpStatusCodeException e) {
+            // 🌟 NÂNG CẤP: Nếu FPT báo lỗi (sai key, hết tiền, text dài...), in thẳng lỗi đó ra Log của Render để dễ đọc
+            System.err.println("FPT AI TỪ CHỐI: " + e.getResponseBodyAsString());
+            return ResponseEntity.status(500).body(Map.of("error", "Lỗi từ FPT: " + e.getResponseBodyAsString()));
         } catch (Exception e) {
-            return ResponseEntity.status(500).body(Map.of("error", "Lỗi kết nối FPT AI: " + e.getMessage()));
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(Map.of("error", "Lỗi Server nội bộ: " + e.getMessage()));
         }
     }
 }

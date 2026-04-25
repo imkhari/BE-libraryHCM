@@ -17,4 +17,4 @@ spring:
 fpt:
   ai:
     api:
-      key: "Xfp3DRyRDsbqjAfXdDOWf2AnN2acNca2"
+      key: ${FPT_AI_API_KEY:Xfp3DRyRDsbqjAfXdDOWf2AnN2acNca2}
