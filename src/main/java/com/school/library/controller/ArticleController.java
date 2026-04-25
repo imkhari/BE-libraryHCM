@@ -1,5 +1,6 @@
 package com.school.library.controller;
 
+import com.school.library.dto.ArticleSummaryDTO;
 import com.school.library.entity.Article;
 import com.school.library.service.ArticleService;
 import lombok.Data;
@@ -21,7 +22,7 @@ public class ArticleController {
 
     // GET /api/v1/articles?category=TIN_TUC
     @GetMapping
-    public ResponseEntity<List<Article>> getArticles(
+    public ResponseEntity<List<ArticleSummaryDTO>> getArticles(
             @RequestParam(required = false, defaultValue = "ALL") String category) {
         return ResponseEntity.ok(articleService.getArticles(category));
     }

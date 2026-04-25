@@ -30,6 +30,12 @@ public class Article {
 
     private Integer views = 0;
 
+    @Column(name = "thumbnail_url", length = 1000)
+    private String thumbnailUrl;
+
+    @Column(length = 500)
+    private String snippet;
+
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 }
