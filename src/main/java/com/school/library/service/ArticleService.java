@@ -58,8 +58,8 @@ public class ArticleService {
         article.setTitle(articleDetails.getTitle());
         article.setContent(articleDetails.getContent());
         article.setCategory(articleDetails.getCategory());
-        article.setAuthor(articleDetails.getAuthor());
-        article.setCreatedAt(articleDetails.getCreatedAt());
+//        article.setAuthor(articleDetails.getAuthor());
+//        article.setCreatedAt(articleDetails.getCreatedAt());
         article.setThumbnailUrl(extractThumbnail(articleDetails.getContent()));
         article.setSnippet(extractSnippet(articleDetails.getContent()));
         return articleRepository.save(article);
