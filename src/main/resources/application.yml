@@ -13,3 +13,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+  fpt:
+    ai:
+      api:
+        key: "Xfp3DRyRDsbqjAfXdDOWf2AnN2acNca2"

@@ -63,6 +63,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/v1/articles/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/articles/**").authenticated()
 
+                        .requestMatchers("/api/v1/tts/**").permitAll()
+
                         // Khóa toàn bộ các API lạ hoặc mới tạo sau này (bao gồm cả api quản lý users)
                         .anyRequest().authenticated()
                 )
